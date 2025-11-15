@@ -1,7 +1,25 @@
+# Virtual environment
 .venv/
+
+# Python cache
 __pycache__/
 *.pyc
+
+# Environment files
 .env
 infra/*.env
+
+# Docker volumes (data folders)
 infra/redis_data/
-mongo_data/
+infra/mongo_data/
+
+# Ignore temporary / intermediate compose files
+infra/docker-compose.phase6.yml
+infra/docker-compose.phase7.yml
+
+# VSCode settings (optional but recommended)
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db

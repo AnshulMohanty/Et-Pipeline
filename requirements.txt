@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+redis
+pymongo
+genson
+orjson
+python-dotenv
+streamlit
