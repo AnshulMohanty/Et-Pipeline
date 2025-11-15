@@ -1,0 +1,6 @@
+{
+  "source": "fixture-E-badtype",
+  "documents": [
+    {"id": "x1", "name": "weird", "price": "not-a-number"}
+  ]
+}

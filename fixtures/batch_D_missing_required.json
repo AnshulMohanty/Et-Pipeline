@@ -1,0 +1,6 @@
+{
+  "source": "fixture-D-missing",
+  "documents": [
+    {"name": "no-id", "price": 100}
+  ]
+}
