@@ -1,0 +1,7 @@
+{
+  "source": "local-test",
+  "documents": [
+    {"id":"t1", "name":"alpha", "price": 10},
+    {"id":"t2", "name":"beta", "price": 5}
+  ]
+}
