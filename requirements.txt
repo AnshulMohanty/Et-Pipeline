@@ -6,3 +6,4 @@ genson
 orjson
 python-dotenv
 streamlit
+beautifulsoup4

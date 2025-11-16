@@ -16,6 +16,8 @@ from .storage import StorageManager
 
 from .dlq import send_to_dlq
 
+from .validator import validate_doc_against_schema, decide_promotion
+
 
 
 REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
@@ -59,92 +61,6 @@ def compute_simple_diff(old_schema, new_schema, field_stats):
             removed.append(k)
 
     return {"added": added, "removed": removed, "changed": changed, "field_stats_sample": field_stats}
-
-
-
-def validate_doc_against_schema_simple(doc, schema, field_stats):
-
-    """
-
-    Very small but stronger validator used for DLQ decisions:
-
-    - If schema lists 'required' fields, ensure they exist in doc.
-
-    - For each property with a 'type' in schema, perform basic type checks.
-
-    - Accept on minor mismatches (e.g. int vs float) but reject on major mismatches (object vs scalar)
-
-    Returns (ok:bool, reason:str|None)
-
-    """
-
-    if not schema:
-
-        return True, None
-
-    props = schema.get("properties", {})
-
-    required = schema.get("required", [])
-
-    # required check
-
-    for r in required:
-
-        if r not in doc:
-
-            return False, f"missing_required_field:{r}"
-
-    # type checks
-
-    for k, spec in props.items():
-
-        if k not in doc:
-
-            continue
-
-        expected = spec.get("type")
-
-        val = doc[k]
-
-        # map python types
-
-        if expected == "integer":
-
-            if not (isinstance(val, int) and not isinstance(val, bool)):
-
-                # allow numeric promotion from float to int only if value is whole number
-
-                if isinstance(val, float) and val.is_integer():
-
-                    continue
-
-                return False, f"type_mismatch:{k}:expected_integer"
-
-        if expected == "number":
-
-            if not isinstance(val, (int, float)) or isinstance(val, bool):
-
-                return False, f"type_mismatch:{k}:expected_number"
-
-        if expected == "string":
-
-            if not isinstance(val, str):
-
-                return False, f"type_mismatch:{k}:expected_string"
-
-        if expected == "object":
-
-            if not isinstance(val, dict):
-
-                return False, f"type_mismatch:{k}:expected_object"
-
-        if expected == "array":
-
-            if not isinstance(val, list):
-
-                return False, f"type_mismatch:{k}:expected_array"
-
-    return True, None
 
 
 
@@ -200,33 +116,43 @@ def process_job(raw_msg_bytes):
 
     diff = compute_simple_diff(latest_schema, candidate_schema, field_stats)
 
-    create_new = False
-
-    if not latest_schema:
-
-        create_new = True
-
-    else:
-
-        if not is_schema_equal(latest_schema, candidate_schema):
-
-            create_new = True
 
 
+    promote, reasons = decide_promotion(latest_schema, candidate_schema, field_stats)
 
     schema_version = latest_meta["version"] if latest_meta else 0
 
-    if create_new:
+    if promote:
 
         new_meta = create_new_version(candidate_schema, diff, job_id, sample[:5], field_stats)
 
         schema_version = new_meta["version"]
 
-        print(f"New schema version created: v{schema_version}")
+        print(f"New schema version created: v{schema_version}; reasons: {reasons}")
+
+    else:
+
+        if latest_meta:
+
+            print(f"Candidate schema not promoted; reasons: {reasons}; using latest v{latest_meta['version']}")
+
+        else:
+
+            # Edge case: no latest and not promoted -> promote anyway
+
+            new_meta = create_new_version(candidate_schema, diff, job_id, sample[:5], field_stats)
+
+            schema_version = new_meta["version"]
+
+            print(f"No prior schema; promoted to v{schema_version}")
 
 
 
-    # Validate and insert docs
+    # Validate and insert docs using latest schema (not candidate) if latest exists, else candidate
+
+    validation_schema = latest_schema if latest_schema else candidate_schema
+
+
 
     ok_docs = []
 
@@ -234,9 +160,11 @@ def process_job(raw_msg_bytes):
 
     for doc in docs:
 
-        ok, reason = validate_doc_against_schema_simple(doc, candidate_schema, field_stats)
+        ok, reason = validate_doc_against_schema(doc, validation_schema)
 
         if ok:
+
+            # attach metadata
 
             doc["_schema_version"] = schema_version
 

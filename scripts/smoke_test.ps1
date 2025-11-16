@@ -2,7 +2,7 @@
 
 param()
 
-Write-Host "Running Chrysalis Phase9 smoke-test..."
+Write-Host "Running Chrysalis Phase10 smoke-test..."
 
 
 
@@ -56,11 +56,61 @@ foreach ($f in $fixtures) {
 
 
 
-Start-Sleep -Seconds 2
+# 3 - post mixed format files using CLI
+
+Write-Host "Posting mixed format files..."
+
+$mixedFiles = @(
+
+  ".\fixtures\mixed\sample.csv",
+
+  ".\fixtures\mixed\sample.html",
+
+  ".\fixtures\mixed\sample.txt"
+
+)
+
+foreach ($f in $mixedFiles) {
+
+    if (-not (Test-Path $f)) { Write-Host "Missing fixture $f"; continue }
+
+    Write-Host "Converting $f to job payload..."
+
+    try {
+
+        $jobJson = docker exec chrysalis_worker python /app/cli/ingest_file.py /app/$($f.Replace('\', '/').Replace('.\', '')) 2>&1
+
+        if ($LASTEXITCODE -eq 0) {
+
+            $jobObj = $jobJson | ConvertFrom-Json
+
+            $body = $jobJson
+
+            $resp = Invoke-RestMethod -Uri "http://127.0.0.1:8000/ingest" -Method Post -Body $body -ContentType 'application/json'
+
+            Write-Host " -> job: $($resp.job_id) status: $($resp.status)"
+
+        } else {
+
+            Write-Host " -> Failed to convert $f"
+
+        }
+
+    } catch {
+
+        Write-Host " -> Error processing $f : $_"
+
+    }
+
+}
 
 
 
-# 3 - check DLQ length
+Start-Sleep -Seconds 3
+
+
+
+# 4 - check DLQ length
 
 $dlqLen = docker exec chrysalis_redis redis-cli LLEN chrysalis:dlq
 
@@ -68,11 +118,11 @@ Write-Host "DLQ length (raw): $dlqLen"
 
 
 
-# 4 - query mongo for raw_data count and schema registry count
+# 5 - query mongo for raw_data count and schema registry count
 
-$raw_count = docker exec chrysalis_mongo mongosh --quiet --eval "db.chrysalis.raw_data.find().count()"
+$raw_count = docker exec chrysalis_mongo mongosh chrysalis --quiet --eval "db.raw_data.find().count()"
 
-$schema_count = docker exec chrysalis_mongo mongosh --quiet --eval "db.chrysalis.schema_registry.find().count()"
+$schema_count = docker exec chrysalis_mongo mongosh chrysalis --quiet --eval "db.schema_registry.find().count()"
 
 Write-Host "raw_data count: $raw_count"
 
@@ -81,4 +131,3 @@ Write-Host "schema_registry count: $schema_count"
 
 
 Write-Host "smoke-test finished. Inspect outputs above for pass/fail."
-
