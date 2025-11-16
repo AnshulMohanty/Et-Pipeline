@@ -1,0 +1,7 @@
+[
+  {"id": 1, "name": "Alice", "price": 9.99, "meta": {"tags": ["sale","x"]}},
+  {"id": 2, "name": "Bob", "price": 12, "meta": {}},
+  {"id": 3, "name": "Charlie", "price": "not-a-number", "meta": {"tags": ["y"]}},
+  {"name": "Delta", "price": 7.5}
+]
+

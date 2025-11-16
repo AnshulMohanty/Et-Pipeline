@@ -1,0 +1,45 @@
+﻿Worker started, polling Redis...
+Worker started, polling Redis...
+[2025-11-16T05:50:13.801370] Processing job 730e9ee6-eaef-4548-ba3c-50efd9569d71 with 6 docs
+[validator] Promotion approved: coverage=1.00, reasons=['coverage_ok(1.00)']
+New schema version created: v28; reasons: ['coverage_ok(1.00)']
+Pushed 6 docs to DLQ
+[2025-11-16T05:50:17.218792] Processing job 722187cb-98e7-4b06-8c14-ce865cc1c1fc with 7 docs
+[validator] Promotion rejected: coverage=0.00, reasons=['coverage_fail(0.00)']
+Candidate schema not promoted; reasons: ['coverage_fail(0.00)']; using latest v28
+Pushed 7 docs to DLQ
+[2025-11-16T05:50:20.514653] Processing job 8c53c39a-54c6-45b4-bc75-4c28005a4aad with 2 docs
+[validator] Promotion approved: coverage=1.00, reasons=['coverage_ok(1.00)']
+New schema version created: v29; reasons: ['coverage_ok(1.00)']
+Pushed 2 docs to DLQ
+[2025-11-16T05:50:23.805473] Processing job 8cd70c71-3a4c-4690-bced-a45e46e47e47 with 7 docs
+[validator] Promotion approved: coverage=1.00, reasons=['coverage_ok(1.00)']
+New schema version created: v30; reasons: ['coverage_ok(1.00)']
+Pushed 7 docs to DLQ
+[2025-11-16T05:50:27.082630] Processing job 4a5c1636-f63d-452f-a96b-b15737f3bb15 with 5 docs
+[validator] Promotion rejected: coverage=0.00, reasons=['coverage_fail(0.00)']
+Candidate schema not promoted; reasons: ['coverage_fail(0.00)']; using latest v30
+Pushed 5 docs to DLQ
+35
+{"payload":{"doc":{"id":"odd3","name":"r├⌐sum├⌐","price":70},"reason":"missing_required_field: CSV fragment"},"reason":"validation_failed","timestamp":"2025-11-16T05:50:27.084761"}
+{"payload":{"doc":{"id":"odd2","name":"na├»ve","price":"60"},"reason":"missing_required_field: CSV fragment"},"reason":"validation_failed","timestamp":"2025-11-16T05:50:27.084525"}
+{"payload":{"doc":{"id":"odd1","name":"cr├¿me","price":"50"},"reason":"missing_required_field: CSV fragment"},"reason":"validation_failed","timestamp":"2025-11-16T05:50:27.084333"}
+{"payload":{"doc":{"# Expected":"Should decode via latin1 fallback"},"reason":"missing_required_field: CSV fragment"},"reason":"validation_failed","timestamp":"2025-11-16T05:50:27.084155"}
+{"payload":{"doc":{"_raw_line":"# mess_bin_odd.txt - Intentionally non-utf8-ish characters but decodable via latin1"},"reason":"missing_required_field: CSV fragment"},"reason":"validation_failed","timestamp":"2025-11-16T05:50:27.083867"}
+{"payload":{"doc":{"# mess5.mixed - Concatenation of different formats: JSON block":"<table><tr><td>mixed3</td><td>html-item</td><td>300</td></tr></table>"," CSV fragment":null," HTML snippet":null},"reason":"missing_required_field:currency"},"reason":"validation_failed","timestamp":"2025-11-16T05:50:23.810041"}
+{"payload":{"doc":{"# mess5.mixed - Concatenation of different formats: JSON block":"mixed2"," CSV fragment":"csv-item"," HTML snippet":"200"},"reason":"missing_required_field:currency"},"reason":"validation_failed","timestamp":"2025-11-16T05:50:23.809716"}
+{"payload":{"doc":{"# mess5.mixed - Concatenation of different formats: JSON block":"id"," CSV fragment":"name"," HTML snippet":"price"},"reason":"missing_required_field:currency"},"reason":"validation_failed","timestamp":"2025-11-16T05:50:23.809511"}
+{"payload":{"doc":{"# mess5.mixed - Concatenation of different formats: JSON block":"]"," CSV fragment":null," HTML snippet":null},"reason":"missing_required_field:currency"},"reason":"validation_failed","timestamp":"2025-11-16T05:50:23.809330"}
+{"payload":{"doc":{"# mess5.mixed - Concatenation of different formats: JSON block":"  {\"id\": \"mixed1\""," CSV fragment":" \"name\": \"json-item\""," HTML snippet":" \"price\": 100}"},"reason":"missing_required_field:currency"},"reason":"validation_failed","timestamp":"2025-11-16T05:50:23.809119"}
+{"payload":{"doc":{"# mess5.mixed - Concatenation of different formats: JSON block":"["," CSV fragment":null," HTML snippet":null},"reason":"missing_required_field:currency"},"reason":"validation_failed","timestamp":"2025-11-16T05:50:23.808841"}
+{"payload":{"doc":{"# mess5.mixed - Concatenation of different formats: JSON block":"# Expected: Parser should attempt to extract structured data from each section"," CSV fragment":null," HTML snippet":null},"reason":"missing_required_field:currency"},"reason":"validation_failed","timestamp":"2025-11-16T05:50:23.808251"}
+{"payload":{"doc":{"id":"h2","name":"screwdriver","price":"10","currency":"USD"},"reason":"missing_required_field: blank cells"},"reason":"validation_failed","timestamp":"2025-11-16T05:50:20.519454"}
+{"payload":{"doc":{"id":"h1","name":"hammer","price":"15","currency":"USD"},"reason":"missing_required_field: blank cells"},"reason":"validation_failed","timestamp":"2025-11-16T05:50:20.519165"}
+{"payload":{"doc":{"id":"t4","name":"json4","price":"40"},"reason":"missing_required_field: blank cells"},"reason":"validation_failed","timestamp":"2025-11-16T05:50:17.221495"}
+{"payload":{"doc":{"id":"t3","name":"json3","price":30},"reason":"missing_required_field: blank cells"},"reason":"validation_failed","timestamp":"2025-11-16T05:50:17.221263"}
+30
+Version: 30
+Version: 29
+Version: 28
+Version: 27
+Version: 26

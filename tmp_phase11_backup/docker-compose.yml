@@ -1,0 +1,64 @@
+# infra/docker-compose.yml
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    container_name: chrysalis_backend
+    env_file:
+      - ../.env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+      - mongo
+    command: ["uvicorn", "backend.app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+  worker:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    container_name: chrysalis_worker
+    env_file:
+      - ../.env
+    depends_on:
+      - redis
+      - mongo
+    command: ["python", "-m", "backend.app.worker"]
+
+  redis:
+    image: redis:7
+    container_name: chrysalis_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  mongo:
+    image: mongo:6
+    container_name: chrysalis_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  streamlit:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    container_name: chrysalis_streamlit
+    env_file:
+      - ../.env
+    ports:
+      - "8501:8501"
+    depends_on:
+      - backend
+      - mongo
+      - redis
+    command: ["streamlit", "run", "demo/streamlit_app.py", "--server.port", "8501", "--server.address", "0.0.0.0"]
+
+volumes:
+  redis_data:
+  mongo_data:

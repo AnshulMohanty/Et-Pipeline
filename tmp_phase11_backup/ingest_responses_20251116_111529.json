@@ -1,0 +1,27 @@
+﻿[
+    {
+        "status":  "accepted",
+        "job_id":  "730e9ee6-eaef-4548-ba3c-50efd9569d71",
+        "file":  "mess2.csv"
+    },
+    {
+        "status":  "accepted",
+        "job_id":  "722187cb-98e7-4b06-8c14-ce865cc1c1fc",
+        "file":  "mess3.txt"
+    },
+    {
+        "status":  "accepted",
+        "job_id":  "8c53c39a-54c6-45b4-bc75-4c28005a4aad",
+        "file":  "mess4.html"
+    },
+    {
+        "status":  "accepted",
+        "job_id":  "8cd70c71-3a4c-4690-bced-a45e46e47e47",
+        "file":  "mess5.mixed"
+    },
+    {
+        "status":  "accepted",
+        "job_id":  "4a5c1636-f63d-452f-a96b-b15737f3bb15",
+        "file":  "mess_bin_odd.txt"
+    }
+]

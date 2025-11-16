@@ -1,0 +1,6 @@
+# mess_bin_odd.txt - Intentionally non-utf8-ish characters but decodable via latin1
+# Expected: Should decode via latin1 fallback
+id:odd1, name:crème, price:50
+id:odd2, name:naïve, price:60
+{"id": "odd3", "name": "résumé", "price": 70}
+

@@ -34,8 +34,6 @@ PROMOTE_PCT = float(os.getenv("PROMOTE_PCT", "0.9"))
 
 REQUIRED_PCT = float(os.getenv("REQUIRED_PCT", "0.9"))
 
-PROMOTE_BURST = os.getenv("PROMOTE_BURST", "False").lower() in ("true", "1", "yes")
-
 
 
 def _pytype_to_json_type(val):
@@ -196,22 +194,12 @@ def decide_promotion(latest_schema, candidate_schema, sample_field_stats):
 
     coverage = ok_count / total
 
-    if PROMOTE_BURST:
-
-        reasons.append(f"burst_mode_enabled")
-
-        return True, reasons
-
     if coverage >= PROMOTE_PCT:
 
         reasons.append(f"coverage_ok({coverage:.2f})")
 
-        print(f"[validator] Promotion approved: coverage={coverage:.2f}, reasons={reasons}")
-
         return True, reasons
 
     reasons.append(f"coverage_fail({coverage:.2f})")
-
-    print(f"[validator] Promotion rejected: coverage={coverage:.2f}, reasons={reasons}")
 
     return False, reasons

@@ -1,0 +1,59 @@
+﻿NAMES                 STATUS         PORTS
+chrysalis_worker      Up 2 minutes   
+chrysalis_streamlit   Up 7 hours     0.0.0.0:8501->8501/tcp, [::]:8501->8501/tcp
+chrysalis_backend     Up 7 hours     0.0.0.0:8000->8000/tcp, [::]:8000->8000/tcp
+chrysalis_mongo       Up 8 hours     0.0.0.0:27017->27017/tcp, [::]:27017->27017/tcp
+chrysalis_redis       Up 8 hours     0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp
+Worker started, polling Redis...
+[2025-11-15T22:19:44.569629] Processing job b70d2ffd-8dc0-4e8f-9915-947d23b78e06 with 2 docs
+New schema version created: v7; reasons: ['added_common_field:id']
+Inserted 2 docs into raw_data (schema v7)
+[2025-11-15T22:19:44.725816] Processing job 7ac1362a-708c-4223-80b3-0e3e49f05f42 with 2 docs
+New schema version created: v8; reasons: ['added_common_field:currency']
+Inserted 2 docs into raw_data (schema v8)
+[2025-11-15T22:19:44.842049] Processing job 10032d2c-ea41-4ee6-9b37-50f191344b53 with 1 docs
+New schema version created: v9; reasons: ['removed_common_field:currency']
+Inserted 1 docs into raw_data (schema v9)
+[2025-11-15T22:19:44.948107] Processing job 9b6ef45a-6594-422d-93fd-4f4f05a48657 with 1 docs
+New schema version created: v10; reasons: ['added_common_field:id']
+Inserted 1 docs into raw_data (schema v10)
+[2025-11-15T22:23:57.594807] Processing job fa6cdcb4-e081-452a-b7a9-fdbde06d7577 with 1 docs
+New schema version created: v11; reasons: ['removed_common_field:id']
+Inserted 1 docs into raw_data (schema v11)
+[2025-11-15T22:23:57.783705] Processing job 574b9e77-5d08-412e-b09e-eaeeecf2c8b5 with 1 docs
+New schema version created: v12; reasons: ['added_common_field:id']
+Inserted 1 docs into raw_data (schema v12)
+Worker started, polling Redis...
+[2025-11-15T22:28:25.456298] Processing job 55a19138-9aa3-401f-9874-471673e15bf4 with 1 docs
+New schema version created: v13; reasons: ['removed_common_field:id']
+Inserted 1 docs into raw_data (schema v13)
+Worker started, polling Redis...
+[2025-11-15T22:41:34.415577] Processing job 59ec2268-c0ae-4ded-bd4d-98335279cf18 with 1 docs
+Inserted 1 docs into raw_data (schema v13)
+[2025-11-15T22:41:34.435795] Processing job 3f3446d5-430b-4097-87d4-9f8fdd5cbaf4 with 1 docs
+New schema version created: v14
+Inserted 1 docs into raw_data (schema v14)
+[2025-11-15T22:42:00.150554] Processing job 12b14012-e46a-4538-88bb-332665d08cb3 with 1 docs
+New schema version created: v15
+Inserted 1 docs into raw_data (schema v15)
+[2025-11-15T22:42:11.004371] Processing job 096ba962-a047-4d81-812a-09986e70650d with 1 docs
+New schema version created: v16
+Inserted 1 docs into raw_data (schema v16)
+Worker started, polling Redis...
+Worker started, polling Redis...
+Worker started, polling Redis...
+Worker started, polling Redis...
+Worker started, polling Redis...
+Worker started, polling Redis...
+[2025-11-16T05:21:05.788211] Processing job e3869b4e-04c0-4d8b-9e7b-cd9c7427cd2c with 2 docs
+New schema version created: v17
+Inserted 2 docs into raw_data (schema v17)
+[2025-11-16T05:21:05.922635] Processing job fd66fd4f-5867-408d-807d-9d113010fa00 with 2 docs
+New schema version created: v18
+Inserted 2 docs into raw_data (schema v18)
+[2025-11-16T05:21:05.929795] Processing job 8f337b81-37dd-4fb3-8c8f-c09e64255034 with 1 docs
+New schema version created: v19
+Inserted 1 docs into raw_data (schema v19)
+[2025-11-16T05:21:05.936765] Processing job 0a0fcc51-8c56-462d-b532-f37401ae03f5 with 1 docs
+New schema version created: v20
+Inserted 1 docs into raw_data (schema v20)

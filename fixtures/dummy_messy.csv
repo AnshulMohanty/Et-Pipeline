@@ -1,0 +1,6 @@
+id,name,prce,extra
+10,Eve,5.00,note
+11,Frank,6.25,note
+12,Gary,not_a_number,note
+,Henry,7.50,note
+

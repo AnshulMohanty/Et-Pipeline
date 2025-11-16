@@ -1,0 +1,24 @@
+﻿=== FINAL SUMMARY ===
+Timestamp: 20251116_111529
+raw_data count: 37
+schema_registry count: 36
+DLQ length: 42
+
+Top 5 schema versions:
+Version: 36
+Version: 35
+Version: 34
+Version: 33
+Version: 32
+
+First 10 DLQ entries:
+{"payload":{"doc":{"id":"p3","name":"tool","price":"20"},"reason":"missing_required_field:currency"},"reason":"validation_failed","timestamp":"2025-11-16T05:52:14.626778"}
+{"payload":{"doc":{"id":"p2","name":"gadget","price":30},"reason":"missing_required_field:currency"},"reason":"validation_failed","timestamp":"2025-11-16T05:52:14.626214"}
+{"payload":{"doc":{"id":"p1","name":"widget","price":"25"},"reason":"missing_required_field:currency"},"reason":"validation_failed","timestamp":"2025-11-16T05:52:14.625886"}
+{"payload":{"doc":{"id":"x1","name":"weird","price":"not-a-number"},"reason":"type_mismatch:price:expected_integer"},"reason":"validation_failed","timestamp":"2025-11-16T05:52:13.589745"}
+{"payload":{"doc":{"name":"no-id","price":100},"reason":"missing_required_field:currency"},"reason":"validation_failed","timestamp":"2025-11-16T05:52:13.586865"}
+{"payload":{"doc":{"id":"t2","name":"beta","price":5},"reason":"missing_required_field: CSV fragment"},"reason":"validation_failed","timestamp":"2025-11-16T05:52:13.460130"}
+{"payload":{"doc":{"id":"t1","name":"alpha","price":10},"reason":"missing_required_field: CSV fragment"},"reason":"validation_failed","timestamp":"2025-11-16T05:52:13.459572"}
+{"payload":{"doc":{"id":"odd3","name":"r├⌐sum├⌐","price":70},"reason":"missing_required_field: CSV fragment"},"reason":"validation_failed","timestamp":"2025-11-16T05:50:27.084761"}
+{"payload":{"doc":{"id":"odd2","name":"na├»ve","price":"60"},"reason":"missing_required_field: CSV fragment"},"reason":"validation_failed","timestamp":"2025-11-16T05:50:27.084525"}
+{"payload":{"doc":{"id":"odd1","name":"cr├¿me","price":"50"},"reason":"missing_required_field: CSV fragment"},"reason":"validation_failed","timestamp":"2025-11-16T05:50:27.084333"}

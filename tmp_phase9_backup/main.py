@@ -15,12 +15,6 @@ except Exception:
 # import metrics router
 from .metrics import router as metrics_router
 
-# import approve router
-try:
-    from .approve import router as approve_router
-except Exception:
-    approve_router = None
-
 app = FastAPI(title="Chrysalis ETL API")
 
 if ingest_router:
@@ -30,10 +24,6 @@ if dlq_router:
 
 # include metrics
 app.include_router(metrics_router)
-
-# include approve
-if approve_router:
-    app.include_router(approve_router)
 
 @app.get("/health")
 def health():

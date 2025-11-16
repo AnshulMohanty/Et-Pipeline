@@ -1,0 +1,4 @@
+id:p1, name:widget, price:25
+{"id": "p2", "name": "gadget", "price": 30}
+id:p3, name:tool, price:20
+

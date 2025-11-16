@@ -6,4 +6,4 @@ genson
 orjson
 python-dotenv
 streamlit
-beautifulsoup4  # required for HTML table parsing
+beautifulsoup4

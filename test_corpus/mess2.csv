@@ -1,0 +1,8 @@
+# mess2.csv - CSV mixing numeric strings, real numbers, blank cells, header typos
+# Expected: "prce" typo instead of "price", mixed types, blanks
+id,name,prce,currency
+c1,apple,"5",USD
+c2,banana,3.5,
+c3,cherry,,EUR
+c4,date,"10.99",USD
+

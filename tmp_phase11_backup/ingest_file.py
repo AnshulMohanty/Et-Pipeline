@@ -2,9 +2,6 @@
 
 import sys, json, uuid, os
 
-# Add parent directory to path for imports
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 from backend.app.ingest_pipeline import parse_file_bytes
 
 def make_job_from_file(path):
@@ -13,17 +10,15 @@ def make_job_from_file(path):
 
     job = {"job_id": str(uuid.uuid4()), "documents": docs}
 
-    return json.dumps(job)
+    print(json.dumps(job))
 
 if __name__ == "__main__":
 
     if len(sys.argv) < 2:
 
-        print("usage: python cli/ingest_file.py path", file=sys.stderr)
+        print("usage: python cli/ingest_file.py path")
 
         sys.exit(2)
 
-    result = make_job_from_file(sys.argv[1])
-
-    print(result)
+    print(make_job_from_file(sys.argv[1]))
 

@@ -1,0 +1,10 @@
+# mess1.json - Tiny list-of-dicts with nested inconsistent keys
+# Expected: Some docs missing fields, some with arrays, one with stringified JSON
+[
+  {"id": "m1", "name": "item1", "price": 10, "tags": ["a", "b"]},
+  {"id": "m2", "name": "item2", "price": 20},
+  {"id": "m3", "name": "item3", "price": 30, "metadata": "{\"key\":\"value\"}"},
+  {"name": "item4", "price": 40},
+  {"id": "m5", "price": 50, "nested": {"a": 1, "b": 2}}
+]
+

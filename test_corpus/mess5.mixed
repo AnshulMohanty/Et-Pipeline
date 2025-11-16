@@ -1,0 +1,9 @@
+# mess5.mixed - Concatenation of different formats: JSON block, CSV fragment, HTML snippet
+# Expected: Parser should attempt to extract structured data from each section
+[
+  {"id": "mixed1", "name": "json-item", "price": 100}
+]
+id,name,price
+mixed2,csv-item,200
+<table><tr><td>mixed3</td><td>html-item</td><td>300</td></tr></table>
+

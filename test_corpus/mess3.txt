@@ -1,0 +1,8 @@
+# mess3.txt - Newline-delimited mixed lines: JSON per line, "key:value" lines, raw sentences
+# Expected: Mixed format parsing
+{"id": "t1", "name": "json1", "price": 10}
+id:t2, name:json2, price:20
+This is a raw sentence that should be stored as _raw_line
+{"id": "t3", "name": "json3", "price": 30}
+id:t4, name:json4, price:40
+
